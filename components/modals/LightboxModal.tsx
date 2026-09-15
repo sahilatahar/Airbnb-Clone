@@ -1,9 +1,9 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Heart, Share, X, ArrowLeft } from "lucide-react";
+import { Photo } from "@/data/listingData";
+import { ArrowLeft, ChevronLeft, ChevronRight, Heart, Share, X } from "lucide-react";
 import Image from "next/image";
 import React, { useCallback, useEffect, useRef } from "react";
-import { Photo } from "@/data/listingData";
 
 interface LightboxModalProps {
     isOpen: boolean;
@@ -119,7 +119,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Image lightbox viewer"
-            className="animate-in fade-in fixed inset-0 z-[60] flex flex-col justify-between bg-white text-content-primary duration-200 select-none"
+            className="animate-in fade-in fixed inset-0 z-60 flex flex-col justify-between bg-white text-content-primary duration-200 select-none"
         >
             <header className="z-20 flex items-center justify-between border-b border-border-secondary bg-white/95 px-6 py-4 backdrop-blur sm:px-10">
                 <button
@@ -224,7 +224,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                             onClick={() => onNavigate(idx)}
                             aria-label={`Jump to photo ${idx + 1}: ${p.title}`}
                             aria-current={idx === currentIndex ? "true" : undefined}
-                            className={`relative h-10 w-14 flex-shrink-0 cursor-pointer overflow-hidden rounded-lg border-2 transition-all focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden ${
+                            className={`relative h-10 w-14 shrink-0 cursor-pointer overflow-hidden rounded-lg border-2 transition-all focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden ${
                                 idx === currentIndex
                                     ? "scale-105 border-black opacity-100 shadow-sm"
                                     : "border-transparent opacity-50 hover:opacity-80"

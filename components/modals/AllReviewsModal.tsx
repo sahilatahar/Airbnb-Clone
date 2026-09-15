@@ -147,7 +147,7 @@ export const AllReviewsModal: React.FC<AllReviewsModalProps> = ({
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search reviews"
                                 aria-label="Search reviews"
-                                className="w-full rounded-full border border-border-input bg-surface-secondary py-2.5 pr-4 pl-10 text-[14px] text-content-primary placeholder:text-content-secondary focus:border-content-primary focus:bg-white focus:outline-hidden"
+                                className="w-full rounded-full border border-border-input bg-surface-secondary py-2.5 pr-4 pl-10 text-[14px] text-content-primary focus:outline-hidden"
                             />
                         </div>
                     </div>

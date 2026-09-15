@@ -142,7 +142,7 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
             </div>
 
             <div className="flex items-start gap-3 border-t border-border-secondary pt-4 text-[12px] text-content-secondary">
-                <ShieldCheck className="h-5 w-5 flex-shrink-0 text-emerald-600" />
+                <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
                 <p>
                     To help protect your payment, always use Airbnb to send money and
                     communicate with hosts.

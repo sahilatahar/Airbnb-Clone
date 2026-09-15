@@ -228,7 +228,7 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                 aria-label={`Photo ${safeIndex + 1} of ${
                                     photos.length
                                 }: ${photo.title} in ${roomTitle}. Press Enter to view full size.`}
-                                className="group relative block aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-2xl bg-surface-secondary text-left shadow-xs transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                                className="group relative block aspect-16/10 w-full cursor-pointer overflow-hidden rounded-2xl bg-surface-secondary text-left shadow-xs transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
                             >
                                 <Image
                                     src={photo.src}
@@ -263,7 +263,7 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                             aria-label={`Photo ${safeIndex + 1} of ${
                                                 photos.length
                                             }: ${photo.title} in ${roomTitle}. Press Enter to view full size.`}
-                                            className="group relative block aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-2xl bg-surface-secondary text-left shadow-xs transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                                            className="group relative block aspect-4/3 w-full cursor-pointer overflow-hidden rounded-2xl bg-surface-secondary text-left shadow-xs transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
                                         >
                                             <Image
                                                 src={photo.src}
@@ -366,13 +366,13 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                     aria-controls={`tour-${cat.id}`}
                                     aria-label={`Jump to ${cat.title} section with ${cat.photos.length} photos`}
                                     onClick={() => scrollToCategory(cat.id)}
-                                    className={`group flex w-[calc(50%-6px)] min-w-[120px] cursor-pointer flex-col items-start gap-1.5 rounded-xl p-1.5 text-left transition-all focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden sm:w-[calc(25%-12px)] md:w-[calc(12.5%-14px)] ${
+                                    className={`group flex w-[calc(50%-6px)] min-w-30 cursor-pointer flex-col items-start gap-1.5 rounded-xl p-1.5 text-left transition-all focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden sm:w-[calc(25%-12px)] md:w-[calc(12.5%-14px)] ${
                                         isActive
                                             ? "bg-surface-secondary/70 shadow-xs ring-2 ring-content-primary ring-offset-1"
                                             : "opacity-80 hover:bg-surface-secondary/40 hover:opacity-100"
                                     }`}
                                 >
-                                    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-surface-secondary">
+                                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-lg bg-surface-secondary">
                                         <Image
                                             src={firstPhoto}
                                             alt=""
@@ -381,7 +381,7 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                             sizes="(max-width: 640px) 50vw, 160px"
                                             className="object-cover transition-transform duration-300 group-hover:scale-105"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-transparent" />
                                         <span className="absolute right-1.5 bottom-1 text-[10px] font-semibold text-white drop-shadow">
                                             {cat.photos.length} photos
                                         </span>
@@ -410,10 +410,10 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                         id={`tour-${cat.id}`}
                         aria-labelledby={`tour-heading-${cat.id}`}
                         tabIndex={-1}
-                        className="border-b border-border-secondary py-14 first:pt-2 last:border-b-0 focus:outline-hidden"
+                        className="border-border-secondary py-14 first:pt-2 last:border-b-0 focus:outline-hidden"
                     >
                         <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-14 xl:gap-20">
-                            <div className="flex-shrink-0 self-start lg:sticky lg:top-28 lg:w-[260px] xl:w-[280px]">
+                            <div className="shrink-0 self-start lg:sticky lg:top-28 lg:w-65 xl:w-70">
                                 <h2
                                     id={`tour-heading-${cat.id}`}
                                     className="text-[24px] font-bold tracking-tight text-content-primary sm:text-[28px] sm:leading-8"
@@ -431,7 +431,7 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                 </div>
                             </div>
 
-                            <div className="w-full max-w-[420px] flex-shrink-0">
+                            <div className="w-full max-w-105 shrink-0">
                                 {renderPhotoGroups(cat.photos, cat.title)}
                             </div>
                         </div>

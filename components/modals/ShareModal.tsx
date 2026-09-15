@@ -116,7 +116,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 </div>
 
                 <div className="my-6 flex items-center gap-4 rounded-2xl border border-border-secondary p-4">
-                    <div className="relative h-18 w-24 flex-shrink-0 overflow-hidden rounded-xl">
+                    <div className="relative h-18 w-24 shrink-0 overflow-hidden rounded-xl">
                         <Image
                             src={data.photos[0]?.src || ""}
                             alt={data.title}

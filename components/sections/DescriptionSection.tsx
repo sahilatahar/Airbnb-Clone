@@ -23,15 +23,15 @@ export const DescriptionSection: React.FC<DescriptionSectionProps> = ({ data }) 
 
             <div className="relative">
                 <div
-                    className={`text-[16px] leading-[24px] text-content-primary transition-all duration-300 ease-in-out ${
-                        isExpanded ? "max-h-[300px]" : "max-h-[72px] overflow-hidden"
+                    className={`text-[16px] leading-6 text-content-primary transition-all duration-300 ease-in-out ${
+                        isExpanded ? "max-h-75" : "max-h-18 overflow-hidden"
                     }`}
                 >
                     <p>{data.description.preview}</p>
                 </div>
 
                 {!isExpanded && (
-                    <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-10 bg-gradient-to-t from-white via-white/80 to-transparent" />
+                    <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-10 bg-linear-to-t from-white via-white/80 to-transparent" />
                 )}
             </div>
 
