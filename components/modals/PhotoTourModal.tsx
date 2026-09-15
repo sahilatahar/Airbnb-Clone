@@ -292,11 +292,8 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
             aria-labelledby="photo-tour-modal-title"
             className="animate-in fade-in fixed inset-0 z-50 overflow-y-auto bg-white text-content-primary duration-200"
         >
-            <h1 id="photo-tour-modal-title" className="sr-only">
-                Photo Tour Gallery
-            </h1>
             <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur">
-                <div className="flex w-full items-center justify-between px-6 py-4 sm:px-10">
+                <div className="relative flex w-full items-center justify-between px-6 py-4 sm:px-10">
                     <button
                         ref={backButtonRef}
                         type="button"
@@ -306,6 +303,14 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                     >
                         <ChevronLeft className="h-5 w-5 stroke-[2.5]" />
                     </button>
+                    <div className="pointer-events-none absolute inset-x-0 flex items-center justify-center">
+                        <h1
+                            id="photo-tour-modal-title"
+                            className="text-base font-semibold text-content-primary"
+                        >
+                            Photo tour
+                        </h1>
+                    </div>
                     <div className="flex items-center gap-2">
                         <button
                             type="button"
