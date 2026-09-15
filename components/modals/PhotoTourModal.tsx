@@ -1,9 +1,9 @@
 "use client";
 
+import { Photo, TourCategory } from "@/data/listingData";
 import { ChevronLeft, Heart, Share } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { Photo, TourCategory } from "@/data/listingData";
 
 interface PhotoTourModalProps {
     isOpen: boolean;
@@ -295,7 +295,6 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
             <h1 id="photo-tour-modal-title" className="sr-only">
                 Photo Tour Gallery
             </h1>
-
             <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur">
                 <div className="flex w-full items-center justify-between px-6 py-4 sm:px-10">
                     <button
@@ -307,7 +306,6 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                     >
                         <ChevronLeft className="h-5 w-5 stroke-[2.5]" />
                     </button>
-
                     <div className="flex items-center gap-2">
                         <button
                             type="button"
@@ -320,6 +318,7 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                         <button
                             type="button"
                             onClick={onSaveToggle}
+                            aria-pressed={isSaved}
                             className="cursor-pointer rounded-full p-2.5 text-content-primary transition-colors hover:bg-surface-secondary focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
                             aria-label={
                                 isSaved ? "Remove from saved" : "Save this listing"
@@ -336,7 +335,6 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                     </div>
                 </div>
             </header>
-
             <nav
                 aria-label="Room categories navigation"
                 className="border-b border-border-secondary bg-white px-6 py-6 sm:px-10"
@@ -386,7 +384,6 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                             {cat.photos.length} photos
                                         </span>
                                     </div>
-
                                     <span
                                         className={`line-clamp-1 w-full text-[12px] font-semibold transition-colors ${
                                             isActive
@@ -402,7 +399,6 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                     </div>
                 </div>
             </nav>
-
             <main className="mx-auto max-w-5xl px-6 py-10 sm:px-10">
                 {tourCategories.map((cat) => (
                     <section
@@ -430,7 +426,6 @@ export const PhotoTourModal: React.FC<PhotoTourModalProps> = ({
                                     {cat.photos.length} photos
                                 </div>
                             </div>
-
                             <div className="w-full max-w-105 shrink-0">
                                 {renderPhotoGroups(cat.photos, cat.title)}
                             </div>

@@ -58,7 +58,6 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({
             <h3 className="mb-6 text-[22px] font-semibold text-content-primary">
                 What this place offers
             </h3>
-
             <div className="mb-8 grid max-w-xl grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                 {featuredAmenities.map((item, idx) => (
                     <div
@@ -72,7 +71,6 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({
                     </div>
                 ))}
             </div>
-
             <button
                 type="button"
                 onClick={onShowAllAmenities}

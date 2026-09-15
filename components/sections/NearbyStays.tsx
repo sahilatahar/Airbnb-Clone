@@ -3,7 +3,7 @@
 import { NearbyStay } from "@/data/listingData";
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface NearbyStaysProps {
     stays: NearbyStay[];
@@ -12,10 +12,11 @@ interface NearbyStaysProps {
 export const NearbyStays: React.FC<NearbyStaysProps> = ({ stays }) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [page, setPage] = useState<number>(1);
-    const [likedMap, setLikedMap] = useState<{ [key: string]: boolean }>({});
+    const [likedMap, setLikedMap] = useState<Record<string, boolean>>({});
     const isProgrammaticScroll = useRef(false);
+    const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    const goToPage = (targetPage: number) => {
+    const goToPage = useCallback((targetPage: number) => {
         const el = scrollContainerRef.current;
         if (!el) return;
 
@@ -28,10 +29,14 @@ export const NearbyStays: React.FC<NearbyStaysProps> = ({ stays }) => {
             el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
         }
 
-        setTimeout(() => {
+        if (scrollTimeoutRef.current) {
+            clearTimeout(scrollTimeoutRef.current);
+        }
+
+        scrollTimeoutRef.current = setTimeout(() => {
             isProgrammaticScroll.current = false;
         }, 500);
-    };
+    }, []);
 
     // Handle manual swipe/drag by user without causing mid-scroll flickering
     useEffect(() => {
@@ -60,14 +65,17 @@ export const NearbyStays: React.FC<NearbyStaysProps> = ({ stays }) => {
 
         return () => {
             clearTimeout(scrollTimer);
+            if (scrollTimeoutRef.current) {
+                clearTimeout(scrollTimeoutRef.current);
+            }
             el.removeEventListener("scroll", onScroll);
         };
     }, []);
 
-    const toggleLike = (id: string, e: React.MouseEvent) => {
+    const toggleLike = useCallback((id: string, e: React.MouseEvent) => {
         e.stopPropagation();
         setLikedMap((prev) => ({ ...prev, [id]: !prev[id] }));
-    };
+    }, []);
 
     return (
         <section aria-label="More stays nearby" className="py-12">
@@ -75,7 +83,6 @@ export const NearbyStays: React.FC<NearbyStaysProps> = ({ stays }) => {
                 <h3 className="text-[22px] font-semibold text-content-primary">
                     More stays nearby
                 </h3>
-
                 <div className="flex items-center gap-3 text-[14px] text-content-primary">
                     <span className="text-[14px] font-medium">{page}/2</span>
                     <div className="flex items-center gap-1.5">
@@ -100,7 +107,6 @@ export const NearbyStays: React.FC<NearbyStaysProps> = ({ stays }) => {
                     </div>
                 </div>
             </div>
-
             <div
                 ref={scrollContainerRef}
                 className="no-scrollbar flex w-full gap-4 overflow-x-auto scroll-smooth pb-2"
@@ -139,11 +145,9 @@ export const NearbyStays: React.FC<NearbyStaysProps> = ({ stays }) => {
                                 />
                             </button>
                         </div>
-
                         <h4 className="mb-1 line-clamp-2 text-[15px] leading-tight font-medium text-content-primary">
                             {stay.title}
                         </h4>
-
                         <div className="flex items-center gap-2 text-[14px] text-content-primary">
                             <span className="font-semibold">{stay.price}</span>
                             <span>★ {stay.rating.toFixed(2)}</span>

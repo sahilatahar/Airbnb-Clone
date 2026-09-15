@@ -119,7 +119,6 @@ export const AllReviewsModal: React.FC<AllReviewsModalProps> = ({
                         {reviewsCount} reviews
                     </div>
                 </div>
-
                 <div className="grid grid-cols-1 overflow-y-auto md:grid-cols-12">
                     <div className="border-b border-border-secondary p-6 md:col-span-5 md:border-r md:border-b-0 md:p-8">
                         <div className="flex items-center gap-2">
@@ -138,7 +137,6 @@ export const AllReviewsModal: React.FC<AllReviewsModalProps> = ({
                             One of the most loved homes on Airbnb based on ratings,
                             reviews, and reliability.
                         </p>
-
                         <div className="relative mt-6">
                             <Search className="absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-content-secondary" />
                             <input
@@ -151,7 +149,6 @@ export const AllReviewsModal: React.FC<AllReviewsModalProps> = ({
                             />
                         </div>
                     </div>
-
                     <div className="space-y-6 p-6 md:col-span-7 md:p-8">
                         {filteredReviews.length === 0 ? (
                             <p className="text-[14px] text-content-secondary">

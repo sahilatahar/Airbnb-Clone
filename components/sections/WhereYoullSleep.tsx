@@ -1,8 +1,8 @@
 "use client";
 
+import { ListingData } from "@/data/listingData";
 import Image from "next/image";
 import React from "react";
-import { ListingData } from "@/data/listingData";
 
 interface WhereYoullSleepProps {
     arrangements: ListingData["sleepingArrangements"];
@@ -18,7 +18,6 @@ export const WhereYoullSleep: React.FC<WhereYoullSleepProps> = ({
             <h3 className="mb-6 text-[22px] font-semibold text-content-primary">
                 Where you&apos;ll sleep
             </h3>
-
             <div className="grid w-full max-w-none grid-cols-1 gap-6 md:grid-cols-1 lg:max-w-2xl lg:grid-cols-2">
                 {arrangements.map((item, idx) => (
                     <button

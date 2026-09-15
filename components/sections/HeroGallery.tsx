@@ -1,9 +1,9 @@
 "use client";
 
+import { Photo } from "@/data/listingData";
 import { Grid, Heart, Share } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { Photo } from "@/data/listingData";
 
 interface HeroGalleryProps {
     photos: Photo[];
@@ -34,7 +34,6 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                 <h1 className="text-[26px] font-semibold tracking-tight text-content-primary sm:leading-8">
                     {title}
                 </h1>
-
                 <div className="flex items-center gap-4 text-[14px] font-semibold text-content-primary">
                     <button
                         type="button"
@@ -44,10 +43,10 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                         <Share className="h-4 w-4 stroke-2" />
                         <span>Share</span>
                     </button>
-
                     <button
                         type="button"
                         onClick={onSaveToggle}
+                        aria-pressed={isSaved}
                         className="group flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 underline decoration-solid underline-offset-2 transition-colors hover:bg-surface-secondary focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
                     >
                         <Heart
@@ -61,7 +60,6 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                     </button>
                 </div>
             </div>
-
             <div className="relative grid h-105 grid-cols-1 gap-2 overflow-hidden rounded-2xl md:grid-cols-4 lg:h-115">
                 <button
                     type="button"
@@ -80,7 +78,6 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                     />
                     <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
                 </button>
-
                 <div className="hidden h-full flex-col gap-2 md:flex">
                     <button
                         type="button"
@@ -113,7 +110,6 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                         />
                     </button>
                 </div>
-
                 <div className="relative hidden h-full flex-col gap-2 md:flex">
                     <button
                         type="button"
@@ -145,7 +141,6 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                             className="object-cover transition-all duration-300 group-hover:brightness-90"
                         />
                     </button>
-
                     <button
                         type="button"
                         onClick={(e) => {

@@ -108,7 +108,6 @@ export const AllAmenitiesModal: React.FC<AllAmenitiesModalProps> = ({
                         <X className="h-5 w-5" />
                     </button>
                 </div>
-
                 <div className="space-y-8 overflow-y-auto p-6 sm:p-8">
                     {categories.map((cat, idx) => (
                         <div

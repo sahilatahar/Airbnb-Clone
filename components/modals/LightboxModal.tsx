@@ -132,7 +132,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                     <ArrowLeft className="h-4 w-4" />
                     <span>Back</span>
                 </button>
-
                 <div
                     aria-live="polite"
                     aria-atomic="true"
@@ -140,7 +139,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                 >
                     {currentIndex + 1} / {photos.length}
                 </div>
-
                 <div className="flex items-center gap-2">
                     <button
                         type="button"
@@ -153,6 +151,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                     <button
                         type="button"
                         onClick={onSaveToggle}
+                        aria-pressed={isSaved}
                         className="cursor-pointer rounded-full p-2.5 text-content-primary transition-colors hover:bg-surface-secondary focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-hidden"
                         aria-label={isSaved ? "Remove from saved" : "Save this listing"}
                     >
@@ -172,7 +171,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                     </button>
                 </div>
             </header>
-
             <main className="relative flex flex-1 items-center justify-center overflow-hidden bg-neutral-50 px-4 sm:px-16">
                 <button
                     type="button"
@@ -182,7 +180,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                 >
                     <ChevronLeft className="h-6 w-6" />
                 </button>
-
                 <div className="relative flex h-[68vh] w-full max-w-5xl items-center justify-center">
                     <Image
                         src={currentPhoto.src}
@@ -192,7 +189,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                         priority
                     />
                 </div>
-
                 <button
                     type="button"
                     onClick={handleNext}
@@ -202,7 +198,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                     <ChevronRight className="h-6 w-6" />
                 </button>
             </main>
-
             <footer className="flex flex-col items-center justify-center border-t border-border-secondary bg-white px-6 py-4 text-center">
                 <p className="mb-1 text-[15px] font-semibold text-content-primary">
                     {currentPhoto.title}
@@ -212,7 +207,6 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
                         {currentPhoto.description}
                     </p>
                 )}
-
                 <nav
                     aria-label="Thumbnail gallery"
                     className="no-scrollbar mt-3 flex max-w-2xl items-center gap-2 overflow-x-auto px-2 py-1"

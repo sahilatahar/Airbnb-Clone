@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { X, Copy, Check, MessageSquare, Mail, Share2 } from "lucide-react";
 import { ListingData } from "@/data/listingData";
+import { Check, Copy, Mail, MessageSquare, Share2, X } from "lucide-react";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 
 interface ShareModalProps {
     isOpen: boolean;
@@ -114,7 +114,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                         <X className="h-5 w-5" />
                     </button>
                 </div>
-
                 <div className="my-6 flex items-center gap-4 rounded-2xl border border-border-secondary p-4">
                     <div className="relative h-18 w-24 shrink-0 overflow-hidden rounded-xl">
                         <Image
@@ -139,7 +138,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                         </p>
                     </div>
                 </div>
-
                 <div className="grid grid-cols-2 gap-3">
                     <button
                         type="button"
@@ -153,7 +151,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                         )}
                         <span>{copied ? "Link copied!" : "Copy Link"}</span>
                     </button>
-
                     <button
                         type="button"
                         onClick={() => {
@@ -170,7 +167,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                         <Mail className="h-5 w-5 text-content-primary" />
                         <span>Email</span>
                     </button>
-
                     <button
                         type="button"
                         onClick={() => {
@@ -187,7 +183,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                         <MessageSquare className="h-5 w-5 text-content-primary" />
                         <span>WhatsApp</span>
                     </button>
-
                     <button
                         type="button"
                         onClick={() => {

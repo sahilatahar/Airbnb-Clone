@@ -47,7 +47,6 @@ export const GuestFavouriteSection: React.FC<GuestFavouriteSectionProps> = ({
                     </span>
                     <Sparkles className="h-10 w-10 stroke-[1.75] text-content-primary sm:h-12 sm:w-12" />
                 </div>
-
                 <h3 className="mb-1 text-[24px] font-bold text-content-primary">
                     Guest favourite
                 </h3>
@@ -62,7 +61,6 @@ export const GuestFavouriteSection: React.FC<GuestFavouriteSectionProps> = ({
                     How reviews work
                 </a>
             </div>
-
             <div className="grid grid-cols-2 gap-4 border-t border-b border-border-primary py-8 sm:grid-cols-4 lg:grid-cols-7">
                 <div className="border-r border-border-primary pr-4">
                     <div className="mb-2 text-[14px] font-semibold text-content-primary">
@@ -92,7 +90,6 @@ export const GuestFavouriteSection: React.FC<GuestFavouriteSectionProps> = ({
                         ))}
                     </div>
                 </div>
-
                 {data.categoryRatings.map((cat, idx) => (
                     <div
                         key={idx}
@@ -114,7 +111,6 @@ export const GuestFavouriteSection: React.FC<GuestFavouriteSectionProps> = ({
                     </div>
                 ))}
             </div>
-
             <div className="no-scrollbar flex items-center gap-2 overflow-x-auto py-6">
                 {data.reviewTags.map((tag) => (
                     <button

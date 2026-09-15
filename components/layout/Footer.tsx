@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import { Globe } from "lucide-react";
+import React from "react";
 
 export const Footer: React.FC = () => {
     return (
@@ -40,7 +40,6 @@ export const Footer: React.FC = () => {
                             </li>
                         </ul>
                     </div>
-
                     <div>
                         <h4 className="mb-3 font-semibold text-content-primary">
                             Hosting
@@ -73,7 +72,6 @@ export const Footer: React.FC = () => {
                             </li>
                         </ul>
                     </div>
-
                     <div>
                         <h4 className="mb-3 font-semibold text-content-primary">
                             Airbnb
@@ -107,7 +105,6 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
                 </div>
-
                 <div className="flex flex-col items-center justify-between gap-4 pt-6 text-[14px] text-content-primary sm:flex-row">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <span>© 2026 Airbnb, Inc.</span>
@@ -128,7 +125,6 @@ export const Footer: React.FC = () => {
                             Company details
                         </a>
                     </div>
-
                     <div className="flex items-center gap-6 font-semibold">
                         <button className="flex cursor-pointer items-center gap-2 hover:underline">
                             <Globe className="h-4 w-4" />

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
     AllAmenitiesModal,
     AllReviewsModal,
@@ -26,6 +25,8 @@ import {
     WhereYoullSleep,
 } from "@/components";
 import { listingData } from "@/data/listingData";
+import { useScrollLock } from "@/hooks";
+import { useCallback, useMemo, useState } from "react";
 
 export default function ListingPage() {
     const [isPhotoTourOpen, setIsPhotoTourOpen] = useState(false);
@@ -37,94 +38,69 @@ export default function ListingPage() {
     const [isSaved, setIsSaved] = useState(false);
     const [selectedReviewTag, setSelectedReviewTag] = useState<string | null>(null);
 
-    const handleOpenLightbox = (index: number) => {
+    const isAnyModalOpen =
+        isPhotoTourOpen ||
+        isLightboxOpen ||
+        isAmenitiesModalOpen ||
+        isReviewsModalOpen ||
+        isShareModalOpen;
+
+    useScrollLock(isAnyModalOpen);
+
+    const handleOpenLightbox = useCallback((index: number) => {
         setLightboxIndex(index);
         setIsLightboxOpen(true);
-    };
+    }, []);
 
-    useEffect(() => {
-        const isAnyModalOpen =
-            isPhotoTourOpen ||
-            isLightboxOpen ||
-            isAmenitiesModalOpen ||
-            isReviewsModalOpen ||
-            isShareModalOpen;
+    const handleOpenPhotoTour = useCallback(() => setIsPhotoTourOpen(true), []);
+    const handleClosePhotoTour = useCallback(() => setIsPhotoTourOpen(false), []);
+    const handleCloseLightbox = useCallback(() => setIsLightboxOpen(false), []);
+    const handleOpenAmenities = useCallback(() => setIsAmenitiesModalOpen(true), []);
+    const handleCloseAmenities = useCallback(() => setIsAmenitiesModalOpen(false), []);
+    const handleOpenReviews = useCallback(() => setIsReviewsModalOpen(true), []);
+    const handleCloseReviews = useCallback(() => setIsReviewsModalOpen(false), []);
+    const handleOpenShare = useCallback(() => setIsShareModalOpen(true), []);
+    const handleCloseShare = useCallback(() => setIsShareModalOpen(false), []);
+    const handleToggleSaved = useCallback(() => setIsSaved((prev) => !prev), []);
 
-        if (isAnyModalOpen) {
-            document.body.classList.add("modal-open");
-            document.documentElement.classList.add("modal-open");
-            document.body.style.overflow = "hidden";
-            document.documentElement.style.overflow = "hidden";
-        } else {
-            document.body.classList.remove("modal-open");
-            document.documentElement.classList.remove("modal-open");
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
-        }
+    const filteredReviews = useMemo(() => {
+        if (!selectedReviewTag) return listingData.reviews;
+        const query = selectedReviewTag.toLowerCase();
+        const matches = listingData.reviews.filter(
+            (r) =>
+                r.comment.toLowerCase().includes(query) ||
+                r.longComment?.toLowerCase().includes(query)
+        );
 
-        return () => {
-            document.body.classList.remove("modal-open");
-            document.documentElement.classList.remove("modal-open");
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
-        };
-    }, [
-        isPhotoTourOpen,
-        isLightboxOpen,
-        isAmenitiesModalOpen,
-        isReviewsModalOpen,
-        isShareModalOpen,
-    ]);
-
-    const filteredReviews = selectedReviewTag
-        ? listingData.reviews.filter(
-              (r) =>
-                  r.comment.toLowerCase().includes(selectedReviewTag.toLowerCase()) ||
-                  (r.longComment &&
-                      r.longComment
-                          .toLowerCase()
-                          .includes(selectedReviewTag.toLowerCase()))
-          ).length > 0
-            ? listingData.reviews.filter(
-                  (r) =>
-                      r.comment.toLowerCase().includes(selectedReviewTag.toLowerCase()) ||
-                      (r.longComment &&
-                          r.longComment
-                              .toLowerCase()
-                              .includes(selectedReviewTag.toLowerCase()))
-              )
-            : listingData.reviews
-        : listingData.reviews;
+        return matches.length > 0 ? matches : listingData.reviews;
+    }, [selectedReviewTag]);
 
     return (
         <main className="min-h-screen bg-surface-primary text-content-primary">
             <Navbar
-                onShareClick={() => setIsShareModalOpen(true)}
+                onShareClick={handleOpenShare}
                 isSaved={isSaved}
-                onSaveToggle={() => setIsSaved(!isSaved)}
+                onSaveToggle={handleToggleSaved}
                 listingTitle={listingData.title}
                 rating={listingData.rating}
                 reviewsCount={listingData.reviewsCount}
             />
-
             <StickyTabBar data={listingData} />
-
             <HeroGallery
                 photos={listingData.photos}
                 title={listingData.title}
-                onOpenPhotoTour={() => setIsPhotoTourOpen(true)}
+                onOpenPhotoTour={handleOpenPhotoTour}
                 onOpenLightbox={handleOpenLightbox}
-                onShareClick={() => setIsShareModalOpen(true)}
+                onShareClick={handleOpenShare}
                 isSaved={isSaved}
-                onSaveToggle={() => setIsSaved(!isSaved)}
+                onSaveToggle={handleToggleSaved}
             />
-
             <div className="mx-auto max-w-7xl px-6 pt-6 sm:px-10">
                 <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-12">
                     <div className="lg:col-span-7 xl:col-span-8">
                         <ListingSummary
                             data={listingData}
-                            onShowAllReviews={() => setIsReviewsModalOpen(true)}
+                            onShowAllReviews={handleOpenReviews}
                         />
                         <KeyHighlights highlights={listingData.highlights} />
                         <DescriptionSection data={listingData} />
@@ -132,79 +108,65 @@ export default function ListingPage() {
                             arrangements={listingData.sleepingArrangements}
                             onSelectPhoto={handleOpenLightbox}
                         />
-                        <AmenitiesSection
-                            onShowAllAmenities={() => setIsAmenitiesModalOpen(true)}
-                        />
+                        <AmenitiesSection onShowAllAmenities={handleOpenAmenities} />
                         <CalendarSection
                             locationName={listingData.locationDetails.city}
                         />
                     </div>
-
                     <div className="relative hidden lg:col-span-5 lg:block xl:col-span-4">
                         <StickyBookingWidget data={listingData} />
                     </div>
                 </div>
-
                 <GuestFavouriteSection
                     data={listingData}
                     selectedTag={selectedReviewTag}
                     onSelectTag={setSelectedReviewTag}
                 />
-
                 <ReviewsSection
                     reviews={filteredReviews}
-                    onShowAllReviews={() => setIsReviewsModalOpen(true)}
+                    onShowAllReviews={handleOpenReviews}
                 />
-
                 <LocationSection location={listingData.locationDetails} />
                 <MeetYourHost host={listingData.host} />
                 <ThingsToKnow data={listingData.thingsToKnow} />
                 <NearbyStays stays={listingData.nearbyStays} />
             </div>
-
             <Footer />
-
             <PhotoTourModal
                 isOpen={isPhotoTourOpen}
-                onClose={() => setIsPhotoTourOpen(false)}
+                onClose={handleClosePhotoTour}
                 photos={listingData.photos}
                 tourCategories={listingData.tourCategories}
-                onSelectPhoto={(idx) => {
-                    handleOpenLightbox(idx);
-                }}
-                onShareClick={() => setIsShareModalOpen(true)}
+                onSelectPhoto={handleOpenLightbox}
+                onShareClick={handleOpenShare}
                 isSaved={isSaved}
-                onSaveToggle={() => setIsSaved(!isSaved)}
+                onSaveToggle={handleToggleSaved}
             />
-
             <LightboxModal
                 isOpen={isLightboxOpen}
-                onClose={() => setIsLightboxOpen(false)}
+                onClose={handleCloseLightbox}
                 photos={listingData.photos}
                 currentIndex={lightboxIndex}
                 onNavigate={setLightboxIndex}
-                onShareClick={() => setIsShareModalOpen(true)}
+                onShareClick={handleOpenShare}
                 isSaved={isSaved}
-                onSaveToggle={() => setIsSaved(!isSaved)}
+                onSaveToggle={handleToggleSaved}
             />
-
             <AllAmenitiesModal
                 isOpen={isAmenitiesModalOpen}
-                onClose={() => setIsAmenitiesModalOpen(false)}
+                onClose={handleCloseAmenities}
                 categories={listingData.amenityCategories}
             />
-
             <AllReviewsModal
                 isOpen={isReviewsModalOpen}
-                onClose={() => setIsReviewsModalOpen(false)}
+                onClose={handleCloseReviews}
                 reviews={listingData.reviews}
                 rating={listingData.rating}
                 reviewsCount={listingData.reviewsCount}
             />
-
             <ShareModal
                 isOpen={isShareModalOpen}
-                onClose={() => setIsShareModalOpen(false)}
+                onClose={handleCloseShare}
                 data={listingData}
             />
         </main>

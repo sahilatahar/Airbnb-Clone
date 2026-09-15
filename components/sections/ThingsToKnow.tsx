@@ -14,7 +14,6 @@ export const ThingsToKnow: React.FC<ThingsToKnowProps> = ({ data }) => {
             <h3 className="mb-6 text-[22px] font-semibold text-content-primary">
                 Things to know
             </h3>
-
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                 <div className="flex flex-col justify-between">
                     <div>
@@ -38,7 +37,6 @@ export const ThingsToKnow: React.FC<ThingsToKnowProps> = ({ data }) => {
                         <ChevronRight className="h-4 w-4 stroke-[2.5]" />
                     </button>
                 </div>
-
                 <div className="flex flex-col justify-between">
                     <div>
                         <div className="mb-3">
@@ -61,7 +59,6 @@ export const ThingsToKnow: React.FC<ThingsToKnowProps> = ({ data }) => {
                         <ChevronRight className="h-4 w-4 stroke-[2.5]" />
                     </button>
                 </div>
-
                 <div className="flex flex-col justify-between">
                     <div>
                         <div className="mb-3">

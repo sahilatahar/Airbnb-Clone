@@ -45,7 +45,6 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                                         {review.initial || review.name[0]}
                                     </div>
                                 )}
-
                                 <div>
                                     <h4 className="text-[16px] font-semibold text-content-primary">
                                         {review.name}
@@ -55,7 +54,6 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                                     </p>
                                 </div>
                             </div>
-
                             <div className="mb-2 flex items-center gap-2 text-[14px] font-medium text-content-primary">
                                 <span className="text-xs">
                                     {"★".repeat(review.rating)}
@@ -65,10 +63,10 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                                     {review.date}
                                 </span>
                             </div>
-
                             <div className="text-[16px] leading-relaxed text-content-primary">
                                 <div className="relative">
                                     <div
+                                        id={`review-comment-${review.id}`}
                                         className={`transition-all duration-200 ${
                                             !isExpanded && hasLongComment
                                                 ? "max-h-18 overflow-hidden"
@@ -81,12 +79,10 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                                                 : review.comment}
                                         </p>
                                     </div>
-
                                     {!isExpanded && hasLongComment && (
                                         <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-8 bg-linear-to-t from-white via-white/80 to-transparent" />
                                     )}
                                 </div>
-
                                 {hasLongComment && (
                                     <button
                                         type="button"
@@ -95,6 +91,8 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                                                 isExpanded ? null : review.id
                                             )
                                         }
+                                        aria-expanded={isExpanded}
+                                        aria-controls={`review-comment-${review.id}`}
                                         className="group mt-1 inline-flex cursor-pointer items-center font-semibold text-content-primary underline hover:text-black focus-visible:ring-2 focus-visible:ring-black focus-visible:outline-hidden"
                                     >
                                         <span>
@@ -114,7 +112,6 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     );
                 })}
             </div>
-
             <button
                 type="button"
                 onClick={onShowAllReviews}

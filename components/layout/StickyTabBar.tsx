@@ -1,8 +1,8 @@
 "use client";
 
-import { Star } from "lucide-react";
-import React, { useEffect, useState } from "react";
 import { ListingData } from "@/data/listingData";
+import { Star } from "lucide-react";
+import React, { useCallback, useEffect, useState } from "react";
 
 interface StickyTabBarProps {
     data: ListingData;
@@ -21,14 +21,12 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
     ];
 
     useEffect(() => {
-        const handleScroll = () => {
+        let ticking = false;
+
+        const updateScroll = () => {
             const scrollPosition = window.scrollY;
 
-            if (scrollPosition > 520) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
+            setIsVisible(scrollPosition > 520);
 
             const amenitiesEl = document.getElementById("amenities");
             const reviewsEl = document.getElementById("reviews");
@@ -45,14 +43,23 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
             } else {
                 setActiveTab("photos");
             }
+
+            ticking = false;
+        };
+
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScroll);
+                ticking = true;
+            }
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll();
+        updateScroll();
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const scrollToSection = (id: string) => {
+    const scrollToSection = useCallback((id: string) => {
         const element = document.getElementById(id);
         if (element) {
             const offset = 90;
@@ -67,9 +74,9 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
             });
             setActiveTab(id);
         }
-    };
+    }, []);
 
-    const scrollToBooking = () => {
+    const scrollToBooking = useCallback(() => {
         if (onReserveClick) {
             onReserveClick();
         } else {
@@ -83,21 +90,29 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
                 window.scrollTo({ top: 300, behavior: "smooth" });
             }
         }
-    };
+    }, [onReserveClick]);
 
     if (!isVisible) return null;
 
     return (
         <div className="animate-in slide-in-from-top-2 sticky top-0 z-40 border-b border-border-secondary bg-white shadow-sm transition-all duration-200">
             <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-10">
-                <nav className="flex h-full items-center gap-8">
+                <nav
+                    role="tablist"
+                    aria-label="Listing content navigation"
+                    className="flex h-full items-center gap-8"
+                >
                     {tabs.map((tab) => {
                         const isActive = activeTab === tab.id;
                         return (
                             <button
                                 key={tab.id}
+                                type="button"
+                                role="tab"
+                                aria-selected={isActive}
+                                aria-controls={tab.id}
                                 onClick={() => scrollToSection(tab.id)}
-                                className={`relative flex h-full cursor-pointer items-center text-[14px] font-semibold transition-colors ${
+                                className={`relative flex h-full cursor-pointer items-center text-[14px] font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:outline-hidden ${
                                     isActive
                                         ? "text-content-primary"
                                         : "text-content-secondary hover:text-content-primary"
@@ -111,7 +126,6 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
                         );
                     })}
                 </nav>
-
                 <div className="flex items-center gap-6">
                     <div className="hidden text-right sm:block">
                         <div className="flex items-baseline justify-end gap-1">
@@ -123,7 +137,6 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
                                 for {data.pricing.defaultNights} nights
                             </span>
                         </div>
-
                         <div className="flex items-center justify-end gap-1 text-[12px] font-semibold text-content-primary">
                             <Star className="h-3 w-3 fill-content-primary text-content-primary" />
                             <span>{data.rating.toFixed(2)}</span>
@@ -132,8 +145,8 @@ export const StickyTabBar: React.FC<StickyTabBarProps> = ({ data, onReserveClick
                             </span>
                         </div>
                     </div>
-
                     <button
+                        type="button"
                         onClick={scrollToBooking}
                         className="cursor-pointer rounded-full bg-linear-to-r from-brand-from via-brand-via to-brand-to px-6 py-3 text-[14px] font-semibold whitespace-nowrap text-white shadow-sm transition-all hover:opacity-95 hover:shadow active:scale-[0.98]"
                     >

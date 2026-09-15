@@ -25,7 +25,6 @@ export const ListingSummary: React.FC<ListingSummaryProps> = ({
                 {data.specs.beds > 1 ? "beds" : "bed"} · {data.specs.bathrooms}{" "}
                 {data.specs.bathrooms > 1 ? "bathrooms" : "bathroom"}
             </p>
-
             <div className="mt-6 flex items-center justify-between rounded-2xl border border-border-primary p-4 shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
                 <div className="flex items-center gap-3">
                     <div className="relative flex h-8 w-8 items-center justify-center text-content-primary">
@@ -40,7 +39,6 @@ export const ListingSummary: React.FC<ListingSummaryProps> = ({
                         </div>
                     </div>
                 </div>
-
                 <div className="flex items-center gap-6 text-right">
                     <div>
                         <div className="flex items-center justify-end gap-1 text-[18px] font-semibold text-content-primary">
@@ -64,7 +62,6 @@ export const ListingSummary: React.FC<ListingSummaryProps> = ({
                     </button>
                 </div>
             </div>
-
             <div className="mt-6 flex items-center gap-4">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full border border-neutral-200">
                     <Image

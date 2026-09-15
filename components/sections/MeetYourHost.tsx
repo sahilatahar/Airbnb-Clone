@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Cake, GraduationCap, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { ListingData } from "@/data/listingData";
+import { Cake, CheckCircle2, GraduationCap, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import React, { useState } from "react";
 
 interface MeetYourHostProps {
     host: ListingData["host"];
@@ -17,7 +17,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
             <h3 className="mb-6 text-[22px] font-semibold text-content-primary">
                 Meet your host
             </h3>
-
             <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-3">
                 <div className="flex flex-col items-center justify-between rounded-3xl border border-border-primary bg-white p-8 text-center shadow-[0_6px_16px_rgba(0,0,0,0.08)]">
                     <div className="flex flex-col items-center">
@@ -35,7 +34,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                                 <CheckCircle2 className="h-4 w-4" />
                             </div>
                         </div>
-
                         <h4 className="text-[24px] leading-tight font-bold text-content-primary">
                             {host.name}
                         </h4>
@@ -43,7 +41,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                             Host
                         </p>
                     </div>
-
                     <div className="grid w-full grid-cols-3 gap-3 border-t border-border-secondary pt-6 text-center">
                         <div>
                             <div className="text-[18px] font-bold text-content-primary">
@@ -72,7 +69,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                         </div>
                     </div>
                 </div>
-
                 <div className="flex flex-col justify-between space-y-6 md:col-span-2">
                     <div>
                         <h5 className="mb-3 text-[16px] font-semibold text-content-primary">
@@ -107,7 +103,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                             ))}
                         </div>
                     </div>
-
                     <div>
                         <h5 className="mb-1 text-[16px] font-semibold text-content-primary">
                             Host details
@@ -118,7 +113,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                         <p className="text-[14px] text-content-primary">
                             {host.responseTime}
                         </p>
-
                         <button
                             type="button"
                             onClick={() => setShowMessageSent(true)}
@@ -129,7 +123,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                     </div>
                 </div>
             </div>
-
             <div className="mb-6 space-y-3 pt-2">
                 <div className="flex items-center gap-3 text-[16px] text-content-primary">
                     <Cake className="h-5 w-5 stroke-[1.5] text-content-primary" />
@@ -140,7 +133,6 @@ export const MeetYourHost: React.FC<MeetYourHostProps> = ({ host }) => {
                     <span>{host.school}</span>
                 </div>
             </div>
-
             <div className="flex items-start gap-3 border-t border-border-secondary pt-4 text-[12px] text-content-secondary">
                 <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
                 <p>

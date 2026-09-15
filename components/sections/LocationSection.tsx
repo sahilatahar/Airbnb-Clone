@@ -1,9 +1,9 @@
 "use client";
 
+import { ListingData } from "@/data/listingData";
 import { ChevronRight, Home, Minus, Plus, Search } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
-import { ListingData } from "@/data/listingData";
 
 interface LocationSectionProps {
     location: ListingData["locationDetails"];
@@ -21,7 +21,6 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ location }) =>
             <p className="mb-6 text-[16px] text-content-primary">
                 {location.city}, {location.state}, {location.country}
             </p>
-
             <div className="relative mb-6 h-95 w-full overflow-hidden rounded-3xl border border-border-primary bg-neutral-100 shadow-xs select-none sm:h-115">
                 <div
                     className="relative h-full w-full origin-center transition-transform duration-300"
@@ -37,7 +36,6 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ location }) =>
                         className="object-cover"
                     />
                 </div>
-
                 <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
                     <div className="relative flex items-center justify-center">
                         <div className="flex h-32 w-32 animate-pulse items-center justify-center rounded-full border-2 border-teal-accent/40 bg-teal-accent/20 sm:h-44 sm:w-44" />
@@ -46,11 +44,9 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ location }) =>
                         </div>
                     </div>
                 </div>
-
                 <div className="absolute top-4 left-4 z-20 rounded-full border border-neutral-200 bg-white/95 p-2.5 shadow-md backdrop-blur">
                     <Search className="h-4 w-4 text-content-primary" />
                 </div>
-
                 <div className="absolute top-4 right-4 z-20 flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-md">
                     <button
                         type="button"
@@ -70,11 +66,9 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ location }) =>
                     </button>
                 </div>
             </div>
-
             <p className="mb-3 text-[16px] font-semibold text-content-primary">
                 Exact location will be provided after booking.
             </p>
-
             <div className="mt-4">
                 <h4 className="mb-1 text-[16px] font-semibold text-content-primary">
                     Neighbourhood highlights
@@ -83,17 +77,21 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ location }) =>
                     {location.neighbourhoodHighlights}
                 </p>
                 {showFullNeighbourhood && (
-                    <p className="mt-2 text-[16px] leading-relaxed text-content-secondary">
+                    <p
+                        id="neighbourhood-extended-details"
+                        className="mt-2 text-[16px] leading-relaxed text-content-secondary"
+                    >
                         Enjoy effortless proximity to Lake Pichola boat cruises, City
                         Palace, Bagore Ki Haveli cultural shows, Saheliyon-ki-Bari
                         gardens, artisanal handicraft bazaars, and premier lakeside
                         rooftop dining spots.
                     </p>
                 )}
-
                 <button
                     type="button"
-                    onClick={() => setShowFullNeighbourhood(!showFullNeighbourhood)}
+                    onClick={() => setShowFullNeighbourhood((prev) => !prev)}
+                    aria-expanded={showFullNeighbourhood}
+                    aria-controls="neighbourhood-extended-details"
                     className="group flex cursor-pointer items-center gap-1 pt-2 text-[16px] font-semibold text-content-primary underline hover:text-black focus-visible:ring-2 focus-visible:ring-black focus-visible:outline-hidden"
                 >
                     <span>{showFullNeighbourhood ? "Show less" : "Show more"}</span>
