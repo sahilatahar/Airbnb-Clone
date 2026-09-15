@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand: #ff385c;
+    --color-brand-hover: #e00b41;
+    --color-brand-dark: #d70466;
+    --color-brand-from: #e61e4d;
+    --color-brand-via: #e31c5f;
+    --color-brand-to: #d70466;
+
+    --color-surface-primary: #ffffff;
+    --color-surface-secondary: #f7f7f7;
+    --color-surface-hover: #f7f7f7;
+
+    --color-content-primary: #222222;
+    --color-content-secondary: #717171;
+    --color-content-muted: #b0b0b0;
+
+    --color-border-primary: #dddddd;
+    --color-border-secondary: #ebebeb;
+    --color-border-input: #b0b0b0;
+
+    --color-verified-green: #008a05;
+    --color-teal-accent: #008489;
+
+    --color-avatar-red: #e00b41;
+    --color-avatar-teal: #008489;
+    --color-avatar-amber: #f7a823;
+    --color-avatar-purple: #7928ca;
+
+    --shadow-airbnb-card: 0 6px 16px rgba(0, 0, 0, 0.12);
+    --shadow-airbnb-search: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-airbnb-popover: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-airbnb-modal: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+:root {
+    --color-brand: #ff385c;
+    --color-brand-hover: #e00b41;
+    --color-brand-dark: #d70466;
+    --color-content-primary: #222222;
+    --color-content-secondary: #717171;
+    --color-surface-primary: #ffffff;
+    --color-surface-secondary: #f7f7f7;
+    --color-border-primary: #dddddd;
+    --color-border-secondary: #ebebeb;
+    --color-avatar-red: #e00b41;
+    --color-avatar-teal: #008489;
+    --color-avatar-amber: #f7a823;
+    --color-avatar-purple: #7928ca;
+}
+
+@layer base {
+    body {
+        color: var(--color-content-primary);
+        background: var(--color-surface-primary);
+        font-family:
+            -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+            sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    html.modal-open,
+    body.modal-open {
+        overflow: hidden !important;
+        height: 100vh !important;
+        touch-action: none;
+    }
+}
