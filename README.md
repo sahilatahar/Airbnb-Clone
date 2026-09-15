@@ -53,24 +53,36 @@ Featuring an authentic Indian heritage stay — **"The Royal Aravalli Pavilion �
 
 ---
 
+## 🏗️ Production Architecture
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./images/production-architecture-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./images/production-architecture.svg">
+    <img src="./images/production-architecture-dark.svg" alt="Production Architecture" width="100%">
+  </picture>
+</p>
+
+---
+
 ## 📁 Project Structure
 
 ```text
 airbnb-clone/
 ├── app/
-│   ├── globals.css          # Global CSS & Tailwind theme definitions
-│   ├── layout.tsx           # Root layout metadata & fonts
-│   └── page.tsx             # Main listing page orchestration
+│   ├── globals.css          # Global CSS & Tailwind v4 theme definitions
+│   ├── layout.tsx           # Root layout metadata & typography
+│   └── page.tsx             # Main listing page orchestration & state
 ├── components/
 │   ├── index.ts             # Clean barrel export for all components
 │   ├── layout/
 │   │   ├── Navbar.tsx       # Top navigation header with search bar & menu
 │   │   ├── Footer.tsx       # Global footer with currency & language selector
-│   │   └── StickyTabBar.tsx # Sticky navigation bar on scroll
+│   │   └── StickyTabBar.tsx # rAF-throttled sticky navigation bar on scroll
 │   ├── modals/
 │   │   ├── PhotoTourModal.tsx   # Fullscreen photo tour gallery
 │   │   ├── LightboxModal.tsx    # Single-photo lightbox viewer
-│   │   ├── AllAmenitiesModal.tsx# Complete amenities dialog
+│   │   ├── AllAmenitiesModal.tsx# Complete categorized amenities dialog
 │   │   ├── AllReviewsModal.tsx  # Searchable reviews modal
 │   │   └── ShareModal.tsx       # Social & link share dialog
 │   └── sections/
@@ -81,13 +93,20 @@ airbnb-clone/
 │       ├── WhereYoullSleep.tsx      # Bedroom arrangements
 │       ├── AmenitiesSection.tsx     # Featured amenities grid
 │       ├── CalendarSection.tsx      # Dual month date picker
-│       ├── StickyBookingWidget.tsx  # Sticky reservation card
+│       ├── StickyBookingWidget.tsx  # Sticky reservation card with coupon
 │       ├── GuestFavouriteSection.tsx# Rating breakdown & category scores
 │       ├── ReviewsSection.tsx       # 2-column review comments
 │       ├── LocationSection.tsx      # Map & neighbourhood highlights
 │       ├── MeetYourHost.tsx         # Host stats & co-hosts
 │       ├── ThingsToKnow.tsx         # Policies & safety details
 │       └── NearbyStays.tsx          # Paginated nearby stays carousel
+├── hooks/
+│   ├── index.ts             # Barrel export for custom hooks
+│   ├── useClickOutside.ts   # Click outside & Escape key listener
+│   └── useScrollLock.ts     # Modal body/HTML scroll locking hook
+├── images/
+│   ├── production-architecture-dark.svg # Dark theme architecture diagram
+│   └── production-architecture.svg      # Light theme architecture diagram
 └── data/
     └── listingData.ts       # Structured property data, photos & reviews
 ```
