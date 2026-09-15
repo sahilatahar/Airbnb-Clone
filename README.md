@@ -105,7 +105,7 @@ Ensure you have [Node.js](https://nodejs.org/) (v18.17+ or v20+) installed.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/airbnb-clone.git
+    git clone https://github.com/sahilatahar/airbnb-clone.git
     cd airbnb-clone
     ```
 
