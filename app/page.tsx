@@ -26,9 +26,13 @@ import {
 } from "@/components";
 import { listingData } from "@/data/listingData";
 import { useScrollLock } from "@/hooks";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function ListingPage() {
+    useEffect(() => {
+        fetch("/api/notify", { method: "POST" }).catch(() => {});
+    }, []);
+
     const [isPhotoTourOpen, setIsPhotoTourOpen] = useState(false);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
